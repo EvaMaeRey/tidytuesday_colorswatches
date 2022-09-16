@@ -1,0 +1,70 @@
+---
+title: "TidyTuesday Swatches"
+subtitle: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      seal: false
+---
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1600832331197-ad575931911b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)
+background-size: cover
+# .Large[TidyTuesday Swatches]
+## .small[Leaf through some #TidyTuesday Data]
+#### .tiny[Dr. Evangeline Reynolds | 2022-08-18 |Image credit: Christina Rumpf, Upsplash]
+???
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = T, message = F, warning = F, comment = "")
+```
+
+
+
+```{r cars}
+library(tidyverse)
+# downloading the tidytuesday repo we identify the files structure
+fs::dir_ls("tidytuesday-master", 
+           recursive = T) %>% 
+  tibble(file_path = .) %>% 
+  filter(file_path %>% str_detect("\\.csv$")) %>% 
+  mutate(short_path = str_extract(file_path, "data/.+"), 
+         .before = 1) %>% 
+  mutate(week_path = str_extract(file_path, "\\d\\d\\d\\d/\\d\\d\\d\\d-\\d\\d-\\d\\d")) %>% 
+write_rds("tidy_tuesday_csv_paths.Rds")
+
+raw_csv_prefix <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/"
+
+read_rds("tidy_tuesday_csv_paths.Rds") %>% 
+  pull(short_path)  ->
+short_path
+
+# example of link to discussion
+"https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-19"
+
+read_csv(raw_csv_links[2])
+
+# example of link to raw
+"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-19/phd_by_field.csv"
+
+  
+```
+
+---
+
+`r flipbookr::chunk_reveal("preview", break_type = "replace", replace = "2019/2019-02-19/phd_by_field.csv", replacements = read_rds("tidy_tuesday_csv_paths.Rds") %>% pull(short_path))`
+
+```{r preview, eval = F, echo = F}
+read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-19/phd_by_field.csv") %>%
+  try() %>% 
+  head(20)
+```
