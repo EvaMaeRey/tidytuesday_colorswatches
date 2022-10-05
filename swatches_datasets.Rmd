@@ -1,0 +1,49 @@
+---
+title: "`datasets` Swatches"
+subtitle: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    seal: false
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      seal: false
+---
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1600832331197-ad575931911b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)
+background-size: cover
+# .Large[`datasets` Swatches]
+## .small[Leaf through some `datasets` Data]
+#### .tiny[Dr. Evangeline Reynolds | 2022-10-05 |Image credit: Christina Rumpf, Upsplash]
+???
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = T, message = F, warning = F, comment = "")
+```
+
+
+
+```{r cars}
+library(tidyverse)
+# found this code on the internet
+ls("package:datasets") ->
+names_of_datasets
+```
+
+---
+
+`r flipbookr::chunk_reveal("preview", break_type = "replace", replace = "chickwts", replacements = names_of_datasets, widths = c(1,4))`
+
+```{r preview, eval = F, echo = F}
+cat("docs: https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/chickwts.html") %>% cat()
+chickwts
+
+
+```
